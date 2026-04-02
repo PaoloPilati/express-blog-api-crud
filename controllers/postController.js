@@ -70,7 +70,12 @@ function destroy(req, res) {
         message: "Post non trovato"
       })
     }
-    postData.splice(postData.indexOf(postToDelete))
+    postData.splice(postData.indexOf(postToDelete), 1)
+
+    console.log(postData)
+
+    // Restituiamo lo stato corretto ("eliminato correttamente")
+    res.sendStatus(204)
   //res.send(`Cancella post ${id}`);
 }
 
