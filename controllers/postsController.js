@@ -3,50 +3,59 @@ const postData = require("../data/data");
 
 
 // INDEX ---> GET /posts
-exports.index = (req, res) => {
+function index(req, res) {
 
   // creo oggetto per la formattazione completa della risposta
   const fullPostList = {
     postIndex: postData.length,
     postList: postData
-  }
+  };
 
   res.json(fullPostList);
   // res.json(postData);
-};
+}
 
 
 // SHOW ---> GET /posts/:id
-exports.show = (req, res) => {
-
-  // ⚠️ FIX: id deve essere number
+function show(req, res) {
   const id = parseInt(req.params.id);
-
-  res.send(`Mostra post ${id}`);
-};
+  // Cerco il post
+  const postFound = postData.find(post => post.id === id);
+  // Se non esiste ---> 404
+  if (!postFound) {
+    return res.status(404).json({
+      error: "Post non trovato"
+    });
+  }
+  // Se esiste ---> lo restituisce
+  res.json(postFound);
+}
 
 
 // STORE ---> POST /posts
-exports.store = (req, res) => {
+function store(req, res) {
   res.send("Crea nuovo post");
-};
+}
 
 
 // UPDATE ---> PUT /posts/:id
-exports.update = (req, res) => {
-
-  // FIX: id number
+function update(req, res) {
   const id = parseInt(req.params.id);
-
   res.send(`Modifica del post ${id}`);
-};
+}
+
+// MODIFY ---> PUT /posts/:id
+function modify (req, res) {
+  const id = parseInt(req.params.id);
+  res.send(`Modifica del post ${id}`);
+}
 
 
 // DESTROY ---> DELETE /posts/:id
-exports.destroy = (req, res) => {
-
-  // FIX: id number
+function destroy(req, res) {
   const id = parseInt(req.params.id);
-
   res.send(`Cancella post ${id}`);
-};
+}
+
+// EXPORT funzioni controller
+module.exports = { index, show, store, update, modify, destroy };
