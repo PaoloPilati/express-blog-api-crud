@@ -62,7 +62,16 @@ function modify (req, res) {
 // DESTROY ---> DELETE /posts/:id
 function destroy(req, res) {
   const id = parseInt(req.params.id);
-  res.send(`Cancella post ${id}`);
+  const postToDelete = postData.find(post => post.id === id);
+    if (!pizza) {
+      return res.json({
+        status: 404,
+        error: "Not Found"
+        message: "Post non trovato"
+      })
+    }
+    postData.splice(postData.indexOf(postToDelete))
+  //res.send(`Cancella post ${id}`);
 }
 
 // EXPORT funzioni controller

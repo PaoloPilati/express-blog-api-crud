@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 // Import controller
-const postsController = require("../controllers/postsController");
+const postsController = require("./../controllers/postController");
 
 
 // INDEX ---> GET /posts
