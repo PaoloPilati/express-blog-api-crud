@@ -4,12 +4,21 @@ const postData = require("../data/data");
 
 // INDEX ---> GET /posts
 function index(req, res) {
+    //inizialmente il menu filtrato corrisponde all'originale
+    let filteredPostList = postData;
+    //Se la richiesta contiene un filtro, allora filtriamo il menu
+    if (req.query.image) {
+        filteredPostList = postData.filter(
+            post => post.image.includes(req.query.image)
+        );
+    }
 
-  // creo oggetto per la formattazione completa della risposta
-  const fullPostList = {
-    postIndex: postData.length,
-    postList: postData
-  };
+
+    // creo oggetto
+    const fullPostList = {
+        postIndex: filteredPostList.length,
+        postList: filteredPostList
+    };
 
   res.json(fullPostList);
   // res.json(postData);
