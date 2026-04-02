@@ -1,5 +1,5 @@
 // Importo i dati (array dei post)
-const postData = require("../data/data");
+const postData = require("../data/postdata");
 
 
 // INDEX ---> GET /posts
@@ -7,14 +7,13 @@ function index(req, res) {
     //inizialmente il menu filtrato corrisponde all'originale
     let filteredPostList = postData;
     //Se la richiesta contiene un filtro, allora filtriamo il menu
-    if (req.query.image) {
+    if (req.query.id) {
         filteredPostList = postData.filter(
-            post => post.image.includes(req.query.image)
+            post => post.id.includes(req.query.id)
         );
     }
 
-
-    // creo oggetto
+    // creo oggetto da mostrare
     const fullPostList = {
         postIndex: filteredPostList.length,
         postList: filteredPostList
