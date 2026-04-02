@@ -1,42 +1,31 @@
+// Import Express
 const express = require("express");
-const router = express.Router();
-const postData = require("../data/data");
 
+// Import router
+const router = express.Router();
+
+// Import controller
+const postsController = require("../controllers/postsController");
 
 
 // INDEX ---> GET /posts
-router.get("/", (req, res) => {
-  //creo oggetto per la formattazione completa della risposta
-  const fullPostList = {
-    postIndex: postData.length,
-    postList: postData
-  }
-  res.json(fullPostList);
-});
+router.get("/", postsController.index);
+
 
 // SHOW ---> GET /posts/:id
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`Mostra post ${id}`)
-});
+router.get("/:id", postsController.show);
+
 
 // STORE ---> POST /posts
-router.post("/", (req, res) => {
-  res.send("Crea nuovo post");
-});
+router.post("/", postsController.store);
 
-// MODIFY ---> PUT /posts/:id
-router.put("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`Modifica del post ${id}`);
-});
 
-//UPDATE ---> PUT
+// UPDATE ---> PUT /posts/:id
+router.put("/:id", postsController.update);
+
 
 // DESTROY ---> DELETE /posts/:id
-router.delete("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`Cancella post ${id}`);
-});
+router.delete("/:id", postsController.destroy);
+
 
 module.exports = router;
