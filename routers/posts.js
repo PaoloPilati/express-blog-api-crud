@@ -22,7 +22,7 @@ router.post("/", postsController.store);
 router.put("/:id", postsController.update);
 
 // MODIFY ---> PUT /posts/:id
-router.patch("/:id", postsController.update);
+router.patch("/:id", postsController.modify);
 
 // DESTROY ---> DELETE /posts/:id
 router.delete("/:id", postsController.destroy);
